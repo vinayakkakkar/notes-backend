@@ -107,24 +107,20 @@ const shareNoteService = {
   process: async (data) => {
     const { id, targetUserEmail, userId } = data;
 
-    // Check if the target user exists
     const targetUser = await User.findOne({ email: targetUserEmail });
     if (!targetUser) {
       throw new Error('Target user not found');
     }
 
-    // Share the note
     const note = await Note.findOne({ _id: id, owner: userId });
     if (!note) {
       throw new Error('Note not found');
     }
 
-    // Check if the note is already shared with the target user
     if (note.sharedWith.includes(targetUser._id)) {
       throw new Error('Note already shared with the target user');
     }
 
-    // Update the note's sharedWith array
     note.sharedWith.push(targetUser._id);
     await note.save();
   },
@@ -143,7 +139,6 @@ const searchNotesService = {
   process: async (data) => {
     const { q, userId } = data;
 
-    // Implement search logic using text indexing or other suitable methods
     const results = await Note.find({ owner: userId, $text: { $search: q } });
     return { results };
   },
