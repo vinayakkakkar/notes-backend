@@ -99,7 +99,4 @@ The API handles errors gracefully with meaningful error messages and appropriate
 - Passwords are hashed using Bcrypt.
 - Rate limiting and request throttling to handle high traffic.
 
-## Contributing
-
-Contributions are welcome! Fork the repository, create a branch, make your changes, and submit a pull request.
 
